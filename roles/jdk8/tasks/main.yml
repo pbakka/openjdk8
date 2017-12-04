@@ -1,0 +1,25 @@
+---
+- name: Download jdk8 artifacts from "{{ artifacts_download_url }}"
+  get_url:
+    url: "{{ artifact_download_url }}"
+    dest: "{{ install_home }}"
+  register: tarball
+  ignore_errors: True
+
+- name: Un-tar tar ball "{{ artifact_tar_ball }}"
+  unarchive:
+    src: "{{ artifact_tar_ball }}"
+    dest: "{{ install_home }}"
+    copy: no
+  when: tarball.changed
+
+- name: Adding bashrc entry for "{{ artifact_name }}"
+  lineinfile:
+    backup: yes
+    dest: "{{ install_home }}/.bashrc"
+    line: "export JAVA_HOME={{ java_home }}"
+
+- name: Exporting PATH
+  lineinfile:
+    dest: "{{ install_home }}/.bashrc"
+    line: "export PATH=$PATH:$JAVA_HOME/bin"

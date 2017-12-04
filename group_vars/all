@@ -1,0 +1,8 @@
+# All Global Variables
+artifact_name: openjdk8
+install_home: "{{ ansible_env.HOME }}"
+artifact_download_file: "{{ artifact_name }}.tar.gz"
+artifact_download_server: 10.0.0.7
+artifact_download_url: http://{{ artifact_download_server }}/artifacts/{{artifact_download_file}}
+artifact_tar_ball: "{{install_home}}/{{artifact_name}}.tar.gz"
+java_home: "{{install_home}}/jvm/jdk8"

@@ -1,0 +1,5 @@
+---
+# Ansible script to install jdk8
+- hosts: all
+  roles:
+    - jdk8
